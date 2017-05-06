@@ -39,20 +39,22 @@ class ViewController: UIViewController {
         }
     }
     
+    //private bo tylko ten VC ma mieć do niego dostęp
+    private var brain = CalculatorBrain()
+    
     @IBAction func performOperation(_ sender: UIButton) {
         
-        userIsInTheMiddleOfTyping = false
+        if userIsInTheMiddleOfTyping {
+            brain.setOperand(displayValue)
+            userIsInTheMiddleOfTyping = false
+            print("getujesz wartość z display.text(poprzez displayeValue): \(displayValue) i zapisujesz do brain.accumulator")
+        }
         if let mathematicalSymbol = sender.currentTitle {
-            switch mathematicalSymbol {
-            case "π":
-                displayValue = Double.pi
-                print("performOperation π")
-            case "√":
-                print("performOperation √ of displeyValue: \(displayValue)")
-                displayValue = sqrt(displayValue)
-            default:
-                break
-            }
+            brain.performOperation(mathematicalSymbol)
+        }
+        if let result = brain.result {
+            displayValue = result
+            print("{set} displayValue = String(newValue/brain.result/brain.accumulator)")
         }
         
     }
