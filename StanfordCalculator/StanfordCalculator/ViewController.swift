@@ -19,14 +19,10 @@ class ViewController: UIViewController {
         
         if userIsInTheMiddleOfTyping {
             let textCurrentlyInDisplay = display.text!
-            
             display.text = textCurrentlyInDisplay + digit
-            print(textCurrentlyInDisplay + digit)
-            print("func touchDigit")
         } else {
             display.text = digit
             userIsInTheMiddleOfTyping = true
-            print("func touchDigit")
         }
     }
     
@@ -53,7 +49,6 @@ class ViewController: UIViewController {
         }
         if let result = brain.result {
             displayValue = result
-            print("{set} displayValue = String(newValue/brain.result/brain.accumulator) \(displayValue)")
         }
         
     }
