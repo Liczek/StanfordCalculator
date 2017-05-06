@@ -22,10 +22,11 @@ class ViewController: UIViewController {
             
             display.text = textCurrentlyInDisplay + digit
             print(textCurrentlyInDisplay + digit)
+            print("func touchDigit")
         } else {
             display.text = digit
             userIsInTheMiddleOfTyping = true
-            print("rozpoczęto wprowadzanie danych")
+            print("func touchDigit")
         }
     }
     
@@ -45,7 +46,9 @@ class ViewController: UIViewController {
             switch mathematicalSymbol {
             case "π":
                 displayValue = Double.pi
-                case "√":
+                print("performOperation π")
+            case "√":
+                print("performOperation √ of displeyValue: \(displayValue)")
                 displayValue = sqrt(displayValue)
             default:
                 break
