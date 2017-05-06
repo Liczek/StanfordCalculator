@@ -47,7 +47,6 @@ class ViewController: UIViewController {
                 displayValue = Double.pi
                 case "√":
                 displayValue = sqrt(displayValue)
-                
             default:
                 break
             }
