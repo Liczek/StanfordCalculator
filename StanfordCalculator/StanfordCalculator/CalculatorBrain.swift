@@ -13,14 +13,16 @@ struct CalculatorBrain {
     // optional bo na początku nie mamy żadnych wartości dodanych przez operand
     private var accumulator: Double?
     
-    func performOperation(_ symbol: String) {
-        switch mathematicalSymbol {
+    mutating func performOperation(_ symbol: String) {
+        switch symbol {
         case "π":
-            displayValue = Double.pi
-            print("performOperation π")
+            accumulator = Double.pi
+            print("brain.performOperation π")
         case "√":
-            print("performOperation √ of displeyValue: \(displayValue)")
-            displayValue = sqrt(displayValue)
+            if let operand = accumulator {
+                print("brain.performOperation √ of displeyValue/ brain.accumulator: \(operand)")
+                accumulator = sqrt(operand)
+            }
         default:
             break
         }
@@ -32,10 +34,6 @@ struct CalculatorBrain {
     
     mutating func setOperand(_ operand: Double) {
         accumulator = operand
-        print("brain.accumulator: \(accumulator)")
-        
-        
-        print("func brain.setOperand")
     }
     
     // optional bo w trakcie dodawania operandów do accumulation result może jeszcze nie istnieć np. 5 x ... jeszcze nie istnieje result dopiero jak będzie 5 x 3 =
