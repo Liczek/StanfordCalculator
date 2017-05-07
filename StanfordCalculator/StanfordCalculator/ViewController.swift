@@ -19,13 +19,10 @@ class ViewController: UIViewController {
         
         if userIsInTheMiddleOfTyping {
             let textCurrentlyInDisplay = display.text!
-            
             display.text = textCurrentlyInDisplay + digit
-            print(textCurrentlyInDisplay + digit)
         } else {
             display.text = digit
             userIsInTheMiddleOfTyping = true
-            print("rozpoczęto wprowadzanie danych")
         }
     }
     
@@ -38,24 +35,28 @@ class ViewController: UIViewController {
         }
     }
     
+    private var brain = CalculationBrain()
+    
     @IBAction func performOperation(_ sender: UIButton) {
         
-        userIsInTheMiddleOfTyping = false
-        if let mathematicalSymbol = sender.currentTitle {
-            switch mathematicalSymbol {
-            case "π":
-                displayValue = Double.pi
-                case "√":
-                displayValue = sqrt(displayValue)
-                
-            default:
-                break
-            }
+        //Jak ktoś kliknie przycisk operacji:
+        //1. wysyłamy dotychczas wprowadzone liczby czyli operand
+        
+        if userIsInTheMiddleOfTyping {
+            brain.setOperand(displayValue)
+            userIsInTheMiddleOfTyping = false
         }
         
+        //2. przesyłamy rodzaj klikniętego symbolu
+        if let mathematicalSymbol = sender.currentTitle {
+            brain.performOperation(mathematicalSymbol)
+            print(mathematicalSymbol)
+        }
+        
+        //3. zwracamy wartość na wyświetlacz po dokonaniu obliczeń w brain
+        if let result = brain.result {
+            displayValue = result
+        }
     }
-    
-    
-    
 }
 
